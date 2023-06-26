@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <math.h>
+
 
 // Fonction à intégrer
 double fonction(double x) {

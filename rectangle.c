@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <math.h>
 
 // Fonction à intégrer
 double fonction(double x) {
-    return 14 * x * x + 7; 
+    return x + exp(x); 
 }
 
 // Méthode des rectangles à gauche
