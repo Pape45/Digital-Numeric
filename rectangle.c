@@ -2,7 +2,7 @@
 
 // Fonction à intégrer
 double fonction(double x) {
-    return 14 * x * x + 7; // Exemple : fonction x^2
+    return 14 * x * x + 7; 
 }
 
 // Méthode des rectangles à gauche
@@ -63,9 +63,9 @@ int main() {
     double resultatDroite = rectanglesDroite(a, b, n);
     double resultatPointMilieu = rectanglesPointMilieu(a, b, n);
 
-    printf("L'approximation de l'integrale par la methode des rectangles a gauche est : %.6f\n", resultatGauche);
-    printf("L'approximation de l'integrale par la methode des rectangles a droite est : %.6f\n", resultatDroite);
-    printf("L'approximation de l'integrale par la methode des rectangles du point milieu est : %.6f\n", resultatPointMilieu);
+    printf("L'approximation de l'integrale par la methode des rectangles a gauche est : %.15f\n", resultatGauche);
+    printf("L'approximation de l'integrale par la methode des rectangles a droite est : %.15f\n", resultatDroite);
+    printf("L'approximation de l'integrale par la methode des rectangles du point milieu est : %.15f\n", resultatPointMilieu);
 
     return 0;
 }
