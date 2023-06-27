@@ -3,47 +3,53 @@
 
 // Fonction à intégrer
 double fonction(double x) {
-    // Remplacez cette fonction par celle que vous souhaitez intégrer
-    return 14 * x * x + 7;
+    return 14 * x * x + 7; // Exemple : fonction sin(x)
 }
 
-// Méthode de Simpson pour le calcul numérique de l'intégrale
-double methodeSimpson(double a, double b, int n) {
+// Calcul de l'approximation de l'intégrale par la méthode de Simpson composite
+double methodeSimpsonComposite(double (*fonction)(double), double a, double b, int n) {
     double h = (b - a) / n; // Largeur de chaque sous-intervalle
-    double sum = fonction(a) + fonction(b); // Somme des valeurs de la fonction aux extrémités
+    double sum = 0.0;
 
-    // Calcul des valeurs de la fonction à l'intérieur des sous-intervalles
-    for (int i = 1; i < n; i++) {
-        double x = a + i * h;
-        if (i % 2 == 0) {
-            sum += 2 * fonction(x);
-        } else {
-            sum += 4 * fonction(x);
-        }
+    for (int i = 0; i < n; i += 2) {
+        double x0 = a + i * h;
+        double x1 = x0 + h;
+        double x2 = x0 + 2 * h;
+
+        double fa = fonction(x0);
+        double fb = fonction(x1);
+        double fc = fonction(x2);
+
+        double area = (h / 3.0) * (fa + 4 * fb + fc);
+        sum += area;
     }
 
-    return (h / 3) * sum; // Calcul de l'approximation de l'intégrale
+    return sum;
 }
 
 int main() {
-    double a, b; // Bornes de l'intervalle d'intégration
-    int n; // Nombre de sous-intervalles
+    double borneInf, borneSup;
+    int nbSousIntervalles;
 
-    // Saisie des bornes de l'intervalle et du nombre de sous-intervalles
-    printf("Entrez la borne inférieure a : ");
-    scanf("%lf", &a);
-    printf("Entrez la borne supérieure b : ");
-    scanf("%lf", &b);
-    printf("Entrez le nombre de sous-intervalles n : ");
-    scanf("%d", &n);
+    printf("Entrez la borne inférieure de l'intervalle : ");
+    scanf("%lf", &borneInf);
 
-    // Calcul de l'intégrale en utilisant la méthode de Simpson
-    double resultat = methodeSimpson(a, b, n);
-    double h = (b - a) / n; // Calcul de la largeur de chaque sous-intervalle
+    printf("Entrez la borne supérieure de l'intervalle : ");
+    scanf("%lf", &borneSup);
 
-    // Affichage des résultats
-    printf("L'approximation de l'intégrale est : %lf\n", resultat);
-    printf("La largeur de chaque sous-intervalle h est : %lf\n", h);
+    printf("Entrez le nombre de sous-intervalles (doit être un multiple de 2) : ");
+    scanf("%d", &nbSousIntervalles);
+
+    // Vérification que le nombre de sous-intervalles est un multiple de 2
+    if (nbSousIntervalles % 2 != 0) {
+        printf("Erreur : le nombre de sous-intervalles doit être un multiple de 2.\n");
+        return 1;
+    }
+
+    // Calcul de l'approximation de l'intégrale
+    double approximation = methodeSimpsonComposite(fonction, borneInf, borneSup, nbSousIntervalles);
+
+    printf("L'approximation de l'intégrale est : %.6lf\n", approximation);
 
     return 0;
 }

@@ -4,7 +4,7 @@
 
 // Fonction à intégrer
 double fonction(double x) {
-    return 14 * x * x + 7;
+    return exp(-x*x);
 }
 
 // Méthode des trapèzes
